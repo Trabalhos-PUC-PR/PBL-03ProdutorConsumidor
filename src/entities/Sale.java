@@ -1,11 +1,11 @@
 package entities;
 
-public class Order {
+public class Sale {
 
 	private char item;
 	private String serial;
 	
-	public Order(char item, String serial) {
+	public Sale(char item, String serial) {
 		this.item = item;
 		this.serial = serial;
 	}
@@ -28,7 +28,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return item + "000:" + serial;
+		return serial +"-"+ item;
 	}
 	
 	
