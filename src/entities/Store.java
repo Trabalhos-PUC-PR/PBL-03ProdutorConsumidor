@@ -29,22 +29,20 @@ public class Store extends Thread {
 	}
 
 	public void run() {
-		Random r = new Random();
+		Random random = new Random();
 		char newChar = ' ';
+		int refreshSaleTimer = random.nextInt(140) + 10;
 		while (true) {
-			newChar = Character.toUpperCase((char) (r.nextInt(catalogue.length) + 'a'));
+			newChar = Character.toUpperCase((char) (random.nextInt(catalogue.length) + 'a'));
 			try {
 				lineGate.acquire();
 				newSale(newChar);
 				lineGate.release();
 				manufacturerGate.release();
+				Thread.sleep(refreshSaleTimer);
+				refreshSaleTimer = random.nextInt(140) + 10;
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
-			}
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 	}

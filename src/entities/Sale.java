@@ -4,7 +4,7 @@ public class Sale {
 
 	private char item;
 	private String serial;
-	
+
 	public Sale(char item, String serial) {
 		this.item = item;
 		this.serial = serial;
@@ -28,9 +28,7 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return serial +"-"+ item;
+		return serial + "-" + item;
 	}
-	
-	
-	
+
 }

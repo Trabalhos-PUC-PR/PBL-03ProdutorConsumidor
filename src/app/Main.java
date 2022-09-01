@@ -19,7 +19,7 @@ public class Main {
 		Semaphore shipmentQueueGate = new Semaphore(1);
 		Semaphore transporterGate = new Semaphore(0);
 
-		Store store1 = new Store("Casas_Bahia", orderQueue, orderQueueGate, manufactureGate);
+		Store store1 = new Store("1.99", orderQueue, orderQueueGate, manufactureGate);
 		Store store2 = new Store("Casas_China", orderQueue, orderQueueGate, manufactureGate);
 		Store store3 = new Store("PoliShop", orderQueue, orderQueueGate, manufactureGate);
 		Store store4 = new Store("Aliexpress", orderQueue, orderQueueGate, manufactureGate);
@@ -32,13 +32,14 @@ public class Main {
 				shipmentQueueGate, transporterGate, 4);
 		Manufacturer china2 = new Manufacturer("Taiwan", orderQueue, shipmentQueue, orderQueueGate, manufactureGate,
 				shipmentQueueGate, transporterGate, 1);
-		Manufacturer china3 = new Manufacturer("Hong Kong", orderQueue, shipmentQueue, orderQueueGate, manufactureGate,
+		Manufacturer china3 = new Manufacturer("Hong_Kong", orderQueue, shipmentQueue, orderQueueGate, manufactureGate,
 				shipmentQueueGate, transporterGate, 4);
 		Manufacturer china4 = new Manufacturer("Jiangxi", orderQueue, shipmentQueue, orderQueueGate, manufactureGate,
 				shipmentQueueGate, transporterGate, 4);
 
-		Transporter sedex1 = new Transporter(shipmentQueue, transporterGate, shipmentQueueGate);
-		Transporter sedex2 = new Transporter(shipmentQueue, transporterGate, shipmentQueueGate);
+		Transporter sedex1 = new Transporter("Amazon_Delivery_System", shipmentQueue, transporterGate,
+				shipmentQueueGate, 10);
+		Transporter sedex2 = new Transporter("Sedex", shipmentQueue, transporterGate, shipmentQueueGate, 20);
 
 		store1.start();
 		store2.start();
