@@ -8,6 +8,7 @@ import queues.ShipmentQueue;
 public class Transporter extends Thread {
 
 	private String name;
+	private int totalShipments;
 	private ShipmentQueue shipmentQueue;
 	private Semaphore transporterGate;
 	private Semaphore shipmentQueueGate;
@@ -16,12 +17,25 @@ public class Transporter extends Thread {
 	public Transporter(String name, ShipmentQueue shipmentQueue, Semaphore transporterGate, Semaphore shipmentQueueGate,
 			int parallelCapacity) {
 		this.name = name;
+		this.totalShipments = 0;
 		this.shipmentQueue = shipmentQueue;
 		this.transporterGate = transporterGate;
 		this.shipmentQueueGate = shipmentQueueGate;
 		this.capacityAvailability = new Semaphore(parallelCapacity);
 	}
 
+	public int getTotalShipments() {
+		return totalShipments;
+	}
+	
+	public void resetTotalShipments() {
+		totalShipments = 0;
+	}
+	
+	public void incrementTotalShipments() {
+		totalShipments++;
+	}
+	
 	public void run() {
 		while (true) {
 			try {

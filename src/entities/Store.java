@@ -24,7 +24,7 @@ public class Store extends Thread {
 	public void newSale(char item) {
 		Sale newOrder = new Sale(item, storeName + "-" + salesCount);
 		orderLine.add(newOrder);
-		System.out.printf("New order #%d: %s\n", salesCount, newOrder);
+//		System.out.printf("New order #%d: %s\n", salesCount, newOrder);
 		salesCount++;
 	}
 

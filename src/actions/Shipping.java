@@ -23,10 +23,11 @@ public class Shipping extends Thread {
 	}
 
 	public void run() {
-		System.out.printf("%s TRANSPORTING %s!\n", transporter, shipment);
+//		System.out.printf("%s TRANSPORTING %s!\n", transporter, shipment);
 		try {
 			Thread.sleep(sleepTime);
-			System.out.printf("%s HAS FINISHED TRANSPORTING %s!\n", transporter, shipment);
+			transporter.incrementTotalShipments();
+//			System.out.printf("%s HAS FINISHED TRANSPORTING %s!\n", transporter, shipment);
 			capacityAvailability.release();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

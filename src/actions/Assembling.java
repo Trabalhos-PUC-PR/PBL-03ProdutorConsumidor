@@ -36,8 +36,7 @@ public class Assembling extends Thread {
 
 	public void run() {
 		try {
-			System.out.printf("Manufacturing #%d: %s (%d@%s)\n", itemNumber, product, sleepTime,
-					factory.getFactoryName());
+//			System.out.printf("Manufacturing #%d: %s (%d@%s)\n", itemNumber, product, sleepTime, factory);
 			Thread.sleep(sleepTime);
 
 			Shipment shipment = new Shipment(product.toString());
@@ -46,8 +45,8 @@ public class Assembling extends Thread {
 			capacityAvailability.release();
 			shipmentQueueGate.release();
 			transporterGate.release();
-			System.out.printf("Wrapping up #%d: %s (%d@%s)\n", itemNumber, product, sleepTime,
-					factory.getFactoryName());
+//			System.out.printf("Wrapping up #%d: %s (%d@%s)\n", itemNumber, product, sleepTime, factory);
+			factory.incrementManufacturedCount();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

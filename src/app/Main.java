@@ -57,5 +57,35 @@ public class Main {
 
 		sedex1.start();
 		sedex2.start();
+		
+		int dayCounter = 1;
+		int whatIsConsideredDay = 24000;
+		while(true) {
+			
+			try {
+				Thread.sleep(whatIsConsideredDay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.printf("END OF DAY %d!\n", dayCounter);
+			System.out.printf("%s manufactured a grand total of %d itens, thats around %.2f per hour!\n", china1, china1.getManufacturedCount(), (double)china1.getManufacturedCount()/(whatIsConsideredDay/1000));
+			System.out.printf("%s manufactured a grand total of %d itens, thats around %.2f per hour!\n", china2, china2.getManufacturedCount(), (double)china2.getManufacturedCount()/(whatIsConsideredDay/1000));
+			System.out.printf("%s manufactured a grand total of %d itens, thats around %.2f per hour!\n", china3, china3.getManufacturedCount(), (double)china3.getManufacturedCount()/(whatIsConsideredDay/1000));
+			System.out.printf("%s manufactured a grand total of %d itens, thats around %.2f per hour!\n", china4, china4.getManufacturedCount(), (double)china4.getManufacturedCount()/(whatIsConsideredDay/1000));
+			System.out.printf("\n");
+			System.out.printf("%s transported %d items today, thats %.2f per hour!\n", sedex1, sedex1.getTotalShipments(), (double)sedex1.getTotalShipments()/(whatIsConsideredDay/1000));
+			System.out.printf("%s transported %d items today, thats %.2f per hour!\n", sedex2, sedex2.getTotalShipments(), (double)sedex2.getTotalShipments()/(whatIsConsideredDay/1000));
+			System.out.printf("\n\n");
+			dayCounter++;
+			china1.resetManufacturedCount();
+			china2.resetManufacturedCount();
+			china3.resetManufacturedCount();
+			china4.resetManufacturedCount();
+			sedex1.resetTotalShipments();
+			sedex2.resetTotalShipments();
+		}
+		
 	}
+	
 }

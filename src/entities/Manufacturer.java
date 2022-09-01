@@ -37,6 +37,18 @@ public class Manufacturer extends Thread {
 		return name;
 	}
 
+	public void incrementManufacturedCount() {
+		manufacturedCount++;
+	}
+	
+	public void resetManufacturedCount() {
+		manufacturedCount = 0;
+	}
+	
+	public int getManufacturedCount() {
+		return manufacturedCount;
+	}
+	
 	public void run() {
 		while (true) {
 			try {
@@ -50,11 +62,15 @@ public class Manufacturer extends Thread {
 				Assembling assembling = new Assembling(aux, shipmentQueue, transporterGate, shipmentQueueGate,
 						manufacturedCount, capacityAvailability, this);
 				assembling.start();
-				manufacturedCount++;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }
