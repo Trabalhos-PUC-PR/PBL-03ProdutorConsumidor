@@ -1,9 +1,9 @@
-package entities;
+package queues;
 
 import java.util.ArrayList;
+import entities.Shipment;
 
 public class ShipmentQueue {
-
 	private ArrayList<Shipment> shipmentQueue;
 //	private static final int maxQueue = 150;
 	

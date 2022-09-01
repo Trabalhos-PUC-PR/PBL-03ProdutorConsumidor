@@ -1,6 +1,8 @@
-package entities;
+package queues;
 
 import java.util.ArrayList;
+
+import entities.Sale;
 
 public class OrderQueue {
 

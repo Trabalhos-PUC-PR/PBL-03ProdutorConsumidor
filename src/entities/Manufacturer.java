@@ -1,6 +1,9 @@
 package entities;
 
 import java.util.concurrent.Semaphore;
+import actions.Assembling;
+import queues.OrderQueue;
+import queues.ShipmentQueue;
 
 public class Manufacturer extends Thread {
 
@@ -11,15 +14,20 @@ public class Manufacturer extends Thread {
 	private Semaphore queueGate;
 	private Semaphore shipmentQueueGate;
 	private Semaphore transporterGate;
-
+	private Semaphore capacityAvailability;
+	private String name;
+	
 	public Manufacturer(
+			String name,
 			OrderQueue orderLine, 
 			ShipmentQueue shipmentQueue, 
 			Semaphore queueGate, 
 			Semaphore manufactureGate,
 			Semaphore shipmentQueueGate,
-			Semaphore transporterGate
+			Semaphore transporterGate,
+			int parallelCapacity
 	) {
+		this.name = name;
 		this.manufacturedCount = 0;
 		
 		this.orderQueue = orderLine;
@@ -29,26 +37,27 @@ public class Manufacturer extends Thread {
 		this.manufactureGate = manufactureGate;
 		this.shipmentQueueGate = shipmentQueueGate;
 		this.transporterGate = transporterGate;
+		
+		capacityAvailability = new Semaphore(parallelCapacity);
 	}
-
+	
+	public String getFactoryName() {
+		return name;
+	}
+	
 	public void run() {
 		while (true) {
 			try {
 				manufactureGate.acquire();
+				capacityAvailability.acquire();
 				
 				queueGate.acquire();
 				Sale aux = orderQueue.pop();
 				queueGate.release();
-				
-				System.out.printf("Manufacturing #%d: %s\n", manufacturedCount, aux);
-				manufacturedCount++;
 
-				Shipment shipment = new Shipment(aux.toString(), manufacturedCount-1);
-				shipmentQueueGate.acquire();
-				shipmentQueue.add(shipment);
-				shipmentQueueGate.release();
-				transporterGate.release();
-				
+				Assembling assembling = new Assembling(aux, shipmentQueue, transporterGate, shipmentQueueGate, manufacturedCount, capacityAvailability, this);
+				assembling.start();
+				manufacturedCount++;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

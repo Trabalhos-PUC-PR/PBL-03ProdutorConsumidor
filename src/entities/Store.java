@@ -2,6 +2,7 @@ package entities;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+import queues.OrderQueue;
 
 public class Store extends Thread {
 

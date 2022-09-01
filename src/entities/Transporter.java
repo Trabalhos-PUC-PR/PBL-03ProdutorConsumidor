@@ -2,6 +2,8 @@ package entities;
 
 import java.util.concurrent.Semaphore;
 
+import queues.ShipmentQueue;
+
 public class Transporter extends Thread {
 
 	ShipmentQueue shipmentQueue;
