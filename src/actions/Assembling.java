@@ -16,7 +16,7 @@ public class Assembling extends Thread {
 	private Semaphore shipmentQueueGate;
 	private Semaphore transporterGate;
 	private ShipmentQueue shipmentQueue;
-	private int itemNumber;
+//	private int itemNumber;
 	private Semaphore capacityAvailability;
 	private Manufacturer factory;
 
@@ -25,7 +25,7 @@ public class Assembling extends Thread {
 		this.product = product;
 		this.random = new Random();
 		this.sleepTime = random.nextInt(30) + 10;
-		this.itemNumber = itemNumber;
+//		this.itemNumber = itemNumber;
 
 		this.shipmentQueue = shipmentQueue;
 		this.shipmentQueueGate = shipmentQueueGate;

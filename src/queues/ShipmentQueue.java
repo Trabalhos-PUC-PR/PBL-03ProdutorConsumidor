@@ -21,4 +21,8 @@ public class ShipmentQueue {
 		return aux;
 	}
 	
+	public int size() {
+		return shipmentQueue.size();
+	}
+	
 }

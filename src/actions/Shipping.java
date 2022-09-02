@@ -10,18 +10,18 @@ public class Shipping extends Thread {
 
 	private Random random;
 	private int sleepTime;
-	private Shipment shipment;
+//	private Shipment shipment;
 	private Transporter transporter;
 	private Semaphore capacityAvailability;
 
 	public Shipping(Transporter transporter, Shipment shipment, Semaphore capacityAvailability) {
 		this.transporter = transporter;
-		this.shipment = shipment;
+//		this.shipment = shipment;
 		this.random = new Random();
 		this.sleepTime = random.nextInt(30) + 10;
 		this.capacityAvailability = capacityAvailability;
 	}
-
+	
 	public void run() {
 //		System.out.printf("%s TRANSPORTING %s!\n", transporter, shipment);
 		try {
